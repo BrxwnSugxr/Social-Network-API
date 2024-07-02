@@ -1,0 +1,157 @@
+![Badge](https://img.shields.io/badge/License-MIT-yellow.svg) ![JavaScript](https://img.shields.io/badge/JavaScript-yellow) ![Node.js](https://img.shields.io/badge/Node.js-blue) ![Express.js@4.19.2](https://img.shields.io/badge/Express.js@4.19.2-pink) ![MongoDB](https://img.shields.io/badge/MongoDB-red) ![Mongoose@8.2.4](https://img.shields.io/badge/Mongoose@8.2.4-purple) ![Moment@2.30.1](https://img.shields.io/badge/Moment@2.30.1-green)
+
+<h1 align = "center"> Social Network API </h1>
+
+In the digital age, where social media platforms are the cornerstone of global communication, a startup aims to revolutionise the landscape with an advanced social network. To achieve scalability and flexibility in managing diverse and voluminous data, the startup seeks to implement an API that leverages the power of a NoSQL database. By choosing a NoSQL database, the social media startup positions itself to handle large amounts of unstructured data efficiently. This approach is essential for supporting the dynamic nature of social interactions, including posts, comments, and user profiles, thereby ensuring a seamless and responsive user experience.
+
+The envisioned social network API is designed to be robust and user-friendly, enabling the social media platform to initiate its server and synchronise Mongoose models with the MongoDB database effortlessly. Through intuitive command executions, the API facilitates the display of users and thoughts data in well-structured JSON format via GET routes, enhancing developer convenience and data readability. Moreover, the API supports extensive functionality for user interactions, including the ability to create, update, and delete users and thoughts, as well as manage reactions and friendships through POST, PUT, and DELETE routes. This comprehensive suite of features ensures that the social network can offer a rich and interactive user experience, fostering community engagement and growth.
+
+## Table of Contents
+
+- [Table of Contents](#table-of-contents)
+- [User Story](#user-story)
+- [Acceptance Criteria](#acceptance-criteria)
+- [Technologies Used](#technologies-used)
+- [Installation Instruction](#installation-instruction)
+- [Test Instruction](#test-instruction)
+- [Screenshot](#screenshot)
+- [Videos](#videos)
+- [Output](#output)
+- [Installation](#installation)
+- [License](#license)
+
+## User Story
+
+```
+AS A social media startup
+I WANT an API for my social network that uses a NoSQL database
+SO THAT my website can handle large amounts of unstructured data
+```
+
+## Acceptance Criteria
+
+```
+GIVEN a social network API
+WHEN I enter the command to invoke the application
+THEN my server is started and the Mongoose models are synced to the MongoDB database
+WHEN I open API GET routes in Insomnia for users and thoughts
+THEN the data for each of these routes is displayed in a formatted JSON
+WHEN I test API POST, PUT, and DELETE routes in Insomnia
+THEN I am able to successfully create, update, and delete users and thoughts in my database
+WHEN I test API POST and DELETE routes in Insomnia
+THEN I am able to successfully create and delete reactions to thoughts and add and remove friends to a user’s friend list
+```
+
+## Technologies Used
+
+- JavaScript
+- Node.js
+- MongoDB
+- Moment (version 2.30.1)
+- Express (version 4.19.2)
+- Mongoose (version 8.2.4)
+
+## Installation Instruction
+
+- [Install nodejs and npm](https://nodejs.org/en/download)
+- [Install MongoDB](https://www.mongodb.com/docs/manual/installation/)
+- [Install Insomnia](https://insomnia.rest/download)
+
+## Test Instruction
+
+To use this project:
+
+- Get a copy of this repo to your local machine.
+- Install the `Node Module`
+
+```
+npm install
+```
+
+- Type in the following to run the database:
+
+```
+npm run seed
+```
+
+- Type in the following to run the project:
+
+```
+npm run start
+```
+
+## Screenshot
+
+<b>Run Seed in Terminal:</b>
+
+![](/Assets/seed.png)
+
+<br>
+
+<b>Thoughts Seed in MongoDB:</b>
+
+![](/Assets/thoughtsSeed.png)
+
+<br>
+
+<b>Users Seed in MongoDB:</b>
+
+![](/Assets/usersSeed.png)
+
+<br>
+
+## Videos
+
+
+
+
+## Output
+
+<b>User Model</b>
+
+- Attributes: The User model includes username, email, thoughts, and friends. Each user has a unique and required username and email, with the email field validated to match a valid email address pattern. The thoughts and friends fields store arrays of references to Thought models and User models, respectively, enabling relational data management.
+- Virtuals: A virtual field friendCount dynamically calculates the number of friends a user has by returning the length of the friends array. This approach optimises data storage and retrieval efficiency, avoiding the need to store a separate count field.
+
+<br>
+
+<b>Thought Model</b>
+
+- Attributes: The Thought model includes thoughtText, createdAt, username, and reactions. thoughtText must be between 1 and 280 characters. The createdAt field automatically records the time a thought was created, with a getter method to format this timestamp upon query. The username indicates who created the thought. The reactions array stores nested Reaction subdocuments.
+- Virtuals: A virtual field reactionCount calculates the number of reactions to a thought, enhancing data interaction without additional storage.
+
+<br>
+
+<b>Reaction Schema</b>
+
+- Defined as a subdocument schema within the Thought model, it includes fields such as reactionId, reactionBody, username, and createdAt, with the reactionId automatically generated. This setup allows for efficient storage and retrieval of reactions as part of the thoughts they relate to.
+
+<br>
+
+<b>API Routes</b>
+
+- API routes facilitate the creation, retrieval, updating, and deletion of users, thoughts, and reactions, adhering to RESTful principles.
+- /api/users routes support operations on users, including listing all users, fetching a single user by ID (with populated thoughts and friends data), creating, updating, and deleting users. Deleting a user also removes their associated thoughts.
+- /api/users/:userId/friends/:friendId routes enable adding or removing friends from a user's friend list, showcasing the application's social networking capabilities.
+- /api/thoughts routes handle thought operations similar to user routes, with additional support for creating thoughts that are automatically linked to the user who created them.
+- /api/thoughts/:thoughtId/reactions routes provide for adding reactions to thoughts and deleting them, further enhancing the interactive aspect of your social network.
+
+<br>
+
+<b>Operational Flow</b>
+
+- When the application is invoked, your server starts, and the defined Mongoose models are synchronised with the MongoDB database, ensuring that your API is ready to handle requests. Testing the API through tools like Insomnia demonstrates the functionality of your routes, allowing for the creation, retrieval, updating, and deletion of users, thoughts, and reactions. This confirms the API’s readiness to support a social networking application's frontend development, focusing on user interactions and data management.
+
+<br>
+
+The implementation forms the backbone of a social network, efficiently managing data relationships and interactions through well-defined models and API routes. This setup not only adheres to best practices in API development but also ensures scalability and maintainability of your application.
+
+## Installation
+
+The project was uploaded to [GitHub](https://github.com/) at the following repository:
+[https://github.com/BrxwnSugxr/Social-Network-API](https://github.com/BrxwnSugxr/Social-Network-API)
+
+
+
+## License
+
+This project is licensed under the [MIT License]

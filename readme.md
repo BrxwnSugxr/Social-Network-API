@@ -15,8 +15,6 @@ The envisioned social network API is designed to be robust and user-friendly, en
 - [Installation Instruction](#installation-instruction)
 - [Test Instruction](#test-instruction)
 - [Screenshot](#screenshot)
-- [Videos](#videos)
-- [Output](#output)
 - [Installation](#installation)
 - [License](#license)
 
